@@ -1,10 +1,11 @@
 import './App.css'
+import LoginForm from './Forms/LoginForm'
 
 function App() {
 
   return (
     <>
-      <h1>React Hook Form</h1>
+      <LoginForm></LoginForm>
     </>
   )
 }
