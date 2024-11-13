@@ -117,6 +117,11 @@ const RegistrationForm = () => {
                                 placeholder="Enter Your Social URL">
                             </input>
                          </Field>
+                         <button
+                          className="mt-8 mr-2 text-2xl"
+                          onClick={() => remove(index)}>
+                            &#8722;
+                         </button>
                   </div>
                 )
               })
