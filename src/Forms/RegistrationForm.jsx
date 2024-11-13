@@ -1,10 +1,12 @@
 /* eslint-disable no-extra-boolean-cast */
+/* eslint-disable no-unused-vars */
+
 import Field from "../components/Field"
 import FieldSet from "../components/FieldSet"
 import {useForm} from 'react-hook-form';
 
-const LoginForm = () => {
 
+const RegistrationForm = () => {
   const {
     register,
     handleSubmit,
@@ -14,26 +16,41 @@ const LoginForm = () => {
 
   const submitForm = (formData) => {
     console.log(formData);
-    const user = {
-      email: 'mhshohan01@gmail.com',
-      password : 'asdASD123!@#'
-    }
-
-    const found = formData.email === user.email &&
-     formData.password === user.password;
-
-    if(!found){
-      setError("root.random", {
-        message : `User with email '${formData.email}' is not found`,
-        type : "random"
-      })
-    }
-  };
+  }
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <>
+       <div className="flex flex-col justify-center items-center">
         <form onSubmit={handleSubmit(submitForm)}>
-          <FieldSet label="Enter Login Details">
+          <FieldSet label="Enter Your Details">
+          <Field label="Full Name" error={errors.fname}>
+                <input
+                    {...register("fname", {
+                      required: "Your Name is required."})}
+                    className={`p-2 border border-gray-200 box-border w-[300px] rounded-md
+                      ${!!errors.fname? "border-red-500" : "border-green-200"}`}
+                    type="text"
+                    name="fname"
+                    id="fname"
+                    placeholder="Enter Your Full Name">
+                </input>
+            </Field>
+          <Field label="Age" error={errors.age}>
+                <input
+                    {...register("age", {
+                    max : {
+                      value: 100,
+                      message: "Age must be between 0 to 100"
+                    },
+                      required: "Age is required."})}
+                    className={`p-2 border border-gray-200 box-border w-[300px] rounded-md
+                      ${!!errors.age? "border-red-500" : "border-green-200"}`}
+                    type="number"
+                    name="age"
+                    id="age"
+                    placeholder="Enter Your Age">
+                </input>
+            </Field>
             <Field label="Email" error={errors.email}>
                 <input
                     {...register("email", {
@@ -64,17 +81,19 @@ const LoginForm = () => {
                     placeholder="Enter Your Password">
                 </input>
             </Field>
+
           </FieldSet>
           <div>{errors?.root?.random?.message}</div>
           <Field>
                 <button
                   type="submit"
                   className="text-md m-auto text-white cursor-pointer
-                  p-1 rounded-lg bg-green-500">Login</button>
+                  p-1 rounded-lg bg-green-500">Register</button>
             </Field>
         </form>
     </div>
+    </>
   )
 }
 
-export default LoginForm
+export default RegistrationForm
